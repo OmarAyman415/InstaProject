@@ -1,8 +1,5 @@
 using Instagram.Models;
-using Instagram.ViewModels;
-using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace Instagram.Services
 {
@@ -15,7 +12,7 @@ namespace Instagram.Services
             _context = new InstagramEntities();
         }
 
-        // (DONE) Check if that  user sent friend request or not to viewed profile s
+        // (DONE) Check if that  user sent friend request or not to viewed profile
         public override bool Check(int userId, int friendId)
         {
             var friend = _context.FriendRequests.SingleOrDefault(c => c.UserId.Equals(userId) && c.FriendId.Equals(friendId));
