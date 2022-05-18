@@ -1,0 +1,112 @@
+﻿* {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(#00ffb3, #00c3ff);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+}
+
+.left-sidebar {
+    background-color: #cbdffa;
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+}
+
+.right-sidebar {
+    background-color: #cbdffa;
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+}
+
+.main-content {
+    flex-basis: 47%;
+}
+
+html,
+body {
+    font-family: sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#friend-list {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    height: 100%;
+    list-style-type: none;
+}
+
+.friend {
+    width: 500px;
+    height: 60px;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+    .friend img {
+        width: 45px;
+        height: 45px;
+        border-radius: 30px;
+        border: 2px solid #aaa;
+        object-fit: cover;
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+
+    .friend .name {
+        font-size: 18px;
+    }
+
+    .friend.selected {
+        background: #0084ff;
+        color: white;
+    }
+
+        .friend.selected img {
+            border-color: white;
+        }
+
+    .friend:not(.selected):hover {
+        background: #ddd;
+    }
+
+li.friend {
+    border-radius: 10px;
+}
+
+li > div {
+    display: flex;
+    align-items: center;
+}
+
+.acc {
+    margin-left: 30px;
+}
+
+.rem {
+    margin-left: 20px;
+}
+
+.half {
+    width: 60%;
+}
+
+li.friend {
+    margin-top: 20px;
+}
