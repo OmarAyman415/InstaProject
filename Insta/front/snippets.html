@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Snippet - BBBootstrap</title>
+  <link href='#' rel='stylesheet'>
+  <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
+  <link rel="stylesheet" href="css/snippets.css">
+  <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+</head>
+
+<body>
+  <div>
+    <form>
+      <div class="details">
+        <p>Write your caption here</p>
+      </div>
+  </div>
+  <textarea placeholder="Nice Photo !" spellcheck="false" required></textarea>
+  </form>
+  </div>
+  <div class="drag-image">
+    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+    <h6>Drag & Drop File Here</h6>
+    <span>OR</span>
+    <button>Browse File</button>
+    <input type="file" hidden>
+  </div>
+  <script type='text/javascript' src='#'></script>
+  <script type='text/javascript' src='#'></script>
+  <script type='text/javascript' src='#'></script>
+  <script type='text/javascript'>const dropArea = document.querySelector(".drag-image"),
+      dragText = dropArea.querySelector("h6"),
+      button = dropArea.querySelector("button"),
+      input = dropArea.querySelector("input");
+    let file;
+
+    button.onclick = () => {
+      input.click();
+    }
+
+    input.addEventListener("change", function () {
+
+      file = this.files[0];
+      dropArea.classList.add("active");
+      viewfile();
+    });
+
+    dropArea.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      dropArea.classList.add("active");
+      dragText.textContent = "Release to Upload File";
+    });
+
+
+    dropArea.addEventListener("dragleave", () => {
+      dropArea.classList.remove("active");
+      dragText.textContent = "Drag & Drop to Upload File";
+    });
+
+    dropArea.addEventListener("drop", (event) => {
+      event.preventDefault();
+
+      file = event.dataTransfer.files[0];
+      viewfile();
+    });
+
+    function viewfile() {
+      let fileType = file.type;
+      let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+      if (validExtensions.includes(fileType)) {
+        let fileReader = new FileReader();
+        fileReader.onload = () => {
+          let fileURL = fileReader.result;
+          let imgTag = `<img src="${fileURL}" alt="image">`;
+          dropArea.innerHTML = imgTag;
+        }
+        fileReader.readAsDataURL(file);
+      } else {
+        alert("This is not an Image File!");
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+      }
+    }</script>
+  <script type='text/javascript'>var myLink = document.querySelector('a[href="#"]');
+    myLink.addEventListener('click', function (e) {
+      e.preventDefault();
+    });</script>
+
+</body>
+
+</html>

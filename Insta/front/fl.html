@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/friendList.css">
+        <title>Instagram</title>
+    </head>
+
+    <body>
+
+
+        <div class="container">
+            <!-- leftSideBar -->
+            <div class="left-sidebar">
+            </div>
+
+            <!-- mainContent -->
+            <div class="main-content">
+                <ul id='friend-list'>
+                    @foreach (var friend in Model.friends)
+                    {
+                    <li class='friend selected'>
+                        <div class="half">
+                            <img src='images/profile.png' />
+                            <div class='name'>
+                                @friend.Username
+                            </div>
+                        </div>
+                        <div>
+                            <div class="acc">
+                                <a href="@Url.Action(" StateFriendRequest","Friend",new
+                                    {userId=Model.user.UserId,friendId=friend.UserId, acceptanceState=true })">
+                                    <input type="submit" value="Accept" name="accepts" id="btnSubmit"
+                                        class="btn btn-primary btn-sm">
+                                </a>
+                            </div>
+                            <div class="rem">
+                                <a href="@Url.Action(" StateFriendRequest","Friend",new
+                                    {userId=Model.user.UserId,friendId=friend.UserId, acceptanceState=false })">
+                                    <input type="submit" value="Decline" name="declines" id="btnCancel"
+                                        class="btn btn-primary btn-sm">
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- rightSideBar -->
+            <div class="right-sidebar">
+            </div>
+        </div>
+    </body>
+
+</html>
