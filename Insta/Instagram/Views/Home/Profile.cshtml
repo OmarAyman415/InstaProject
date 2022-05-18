@@ -1,0 +1,107 @@
+﻿@model  Instagram.ViewModels.UserFriendViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/Content/themes/base/profile.css">
+</head>
+<body>
+
+    @Html.Partial("navbar")
+    <header>
+
+        <div class="container">
+
+            <div class="profile">
+
+                <div class="profile-image">
+
+                    <img src="~/Content/images/profileImage/@Model.user.ProfileImage" alt="">
+
+                </div>
+
+                <div class="profile-user-settings">
+
+                    <h1 class="profile-user-name">
+                        @Html.DisplayFor(c => c.user.Username)
+                    </h1>
+                    
+
+                    <a href="@Url.Action("EditProfile","Home",new {user = Model.user.Email })"><button class="btn profile-edit-btn show-modal">Edit Profile</button></a>
+
+
+</div>
+
+                <div class="profile-stats">
+
+                    <ul>
+                        <li><span class="profile-stat-count">@Model.user.Posts.Count()</span> posts</li>
+                        <li>
+                        <span class="profile-stat-count">@Model.friends.Count()</span>
+                        <a href="@Url.Action("FriendList","Friend",new {userId = Model.user.UserId })">
+                            Friends
+                        </a>
+                            
+                        </li>
+                    </ul>
+                    
+                </div>
+
+            </div>
+            <!-- End of profile section -->
+
+        </div>
+        <!-- End of container -->
+
+    </header>
+    <hr class="separate">
+    <br>
+    <br>
+    <main>
+
+        <div class="container">
+
+            <div class="gallery">
+                @*Post*@
+                @foreach (var post in Model.user.Posts.Reverse())
+                {
+                    <div class="gallery-item" tabindex="0">
+                        
+                        <img src="~/Content/images/@post.photo" class="gallery-image" alt="">
+                        
+                        <p>@post.Likes</p>
+                        <div class="gallery-item-info">
+                            <a href="@Url.Action("ViewPost","Post",new { userId = Model.user.UserId, postId = post.PostId})" style="color:black;">
+                                <ul>
+                                    <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> @post.Likes</li>
+                                    <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> @post.Comments.Count()</li>
+                                </ul>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+
+              
+            </div>
+            <!-- End of gallery -->
+         
+
+        </div>
+        <!-- End of container -->
+
+    </main>
+
+    <script src="~/Scripts/popup.js"></script>
+
+</body>
+</html>
