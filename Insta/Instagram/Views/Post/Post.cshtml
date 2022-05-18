@@ -1,0 +1,144 @@
+﻿@model Instagram.Models.Post
+@{
+    ViewBag.Title = "Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html <!-- Coding By CodeWithNepal - codewithnepal.com -->
+<html lang="en" dir="ltr">
+
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="~/Content/themes/base/addPost.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- FontAweome CDN Link for Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="wrapper">
+                <section class="post">
+                    <div class="form">
+                        <header>Add Post</header>
+
+                        <div class="content">
+                            <div class="details">
+                                <p>Write your caption here</p>
+                            </div>
+                        </div>
+                        @using (Html.BeginForm("Post", "Post", null, FormMethod.Post, new
+                        {
+                            enctype = "multipart/form-data"
+                        }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <textarea placeholder="Nice Photo !" name="captionText" spellcheck="false" required></textarea>
+                            <div class="drag-image">
+                                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                <h6>File Show up Here</h6>
+                                <button style="width: 200px;">Browse File</button>
+                                <input id="input" title="Upload Images" type="file" name="file2" hidden onclick="change()" />
+                            </div>
+                            <input id="imagePath2" title="Upload Images" type="file" name="file" hidden required />
+                            <input class="post-btn" type="submit" value="Post">
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+
+
+        <!-- Scripts -->
+
+        <script type='text/javascript' src='#'></script>
+        <script type='text/javascript' src='#'></script>
+        <script type='text/javascript' src='#'></script>
+        <script type='text/javascript'>
+            const dropArea = document.querySelector(".drag-image"),
+                dragText = dropArea.querySelector("h6"),
+                button = dropArea.querySelector("button"),
+                input = dropArea.querySelector("input");
+            let file;
+
+            button.onclick = () => {
+                input.click();
+            }
+
+            input.addEventListener("change", function () {
+
+                file = this.files[0];
+                dropArea.classList.add("active");
+                viewfile();
+            });
+
+            dropArea.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                dropArea.classList.add("active");
+                dragText.textContent = "Release to Upload File";
+            });
+
+
+            dropArea.addEventListener("dragleave", () => {
+                dropArea.classList.remove("active");
+                dragText.textContent = "Drag & Drop to Upload File";
+            });
+
+            dropArea.addEventListener("drop", (event) => {
+                event.preventDefault();
+
+                file = event.dataTransfer.files[0];
+                viewfile();
+            });
+
+            function viewfile() {
+                let fileType = file.type;
+                let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+                if (validExtensions.includes(fileType)) {
+                    let fileReader = new FileReader();
+                    fileReader.onload = () => {
+                        let fileURL = fileReader.result;
+                        let imgTag = `<img src="${fileURL}" alt="image">`;
+                        dropArea.innerHTML = imgTag;
+                    }
+                    fileReader.readAsDataURL(file);
+                } else {
+                    alert("This is not an Image File!");
+                    dropArea.classList.remove("active");
+                    dragText.textContent = "Drag & Drop to Upload File";
+                }
+            }</script>
+        <script type='text/javascript'>
+            var myLink = document.querySelector('a[href="#"]');
+            myLink.addEventListener('click', function (e) {
+                e.preventDefault();
+            });</script>
+
+        <script>
+            let change = function () {
+                let file = document.getElementById("input");
+                let back = document.getElementById("imagePath2");
+
+                file.addEventListener('change', function () {
+                    let files = this.files;
+                    let dt = new DataTransfer();
+                    for (let i = 0; i < files.length; i++) {
+                        let f = files[i];
+                        dt.items.add(
+                            new File(
+                                [f.slice(0, f.size, f.type)],
+                                f.name
+                            ));
+                    }
+                    back.files = dt.files;
+                });
+            }
+        </script>
+
+    </body>
+
+</html>
