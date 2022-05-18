@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Insta
@@ -13,6 +9,14 @@ namespace Insta
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+
+            var container = new Container();
+
+            container.Register<Service>();
+            container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+            GlobalFilters.Filters.Add(new AuthorizationFilter());
         }
     }
 }
