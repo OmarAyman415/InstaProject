@@ -1,0 +1,53 @@
+﻿@model Instagram.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Register</h2>
+
+
+
+<div>
+
+    <div>
+        @Html.ValidationSummary()
+    </div>
+
+    @using (Html.BeginForm())
+    {
+    <table>
+        <tr>
+            <td>@Html.LabelFor(c => c.UserName, "UserName:")</td>
+            <td>@Html.TextBoxFor(c => c.UserName)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(c => c.FirstName, "FirstName:")</td>
+            <td>@Html.TextBoxFor(c => c.FirstName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(c => c.LastName, "lastName:")</td>
+            <td>@Html.TextBoxFor(c => c.LastName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(c => c.UserPassword, "Password")</td>
+            <td>@Html.TextBoxFor(c => c.UserPassword)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(c => c.Email, "Email:")</td>
+            <td>@Html.TextBoxFor(c => c.Email)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(c => c.Mobile, "Mobile:")</td>
+            <td>@Html.TextBoxFor(c => c.Mobile)</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Register" />
+                <input type="reset" value="Reset" />
+            </td>
+        </tr>
+    </table>
+    }
+</div>
